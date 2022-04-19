@@ -1,0 +1,48 @@
+for i=1:numel(imf(1,:))
+    subplot(numel(imf(1,:)),1,i)
+    plot(t,imf(:,i));
+    hold on
+    %imf(i,:)=imf(i,:)-mean(imf(i,:))
+    X = fftshift(fft(imf(:,i)));
+    [maxpeak, maxpeakindes] = max(abs(X)*2);
+    if [(abs(f(maxpeakindes)))>=0.05 && (abs(f(maxpeakindes)))<=0.75]
+        %c=c+1;
+        M(i,:)=imf(:,i)
+
+    end
+end
+
+
+
+
+
+
+
+
+% define dimensions
+numPoints = length(Y(j).y); % 2000 in your case
+numSegments = 16; % number of segments
+segLength = (numPoints-1)/numSegments;
+% make a data array that has a column of data for each non-overlapping segment
+Z = reshape(Y(j).y(1:144000,1),segLength,[])
+%M = zeros(numSegments,1); % preallocate array to hold results
+
+
+
+sig=sgolayfilt(Z(:,k),3,9)
+
+
+
+for i=1:(size(imf,1)-1)
+    subplot(size(imf,1),1,i);
+    plot(t,imf(i,:));
+    hold on;
+    %imf(i,:)=imf(i,:)-mean(imf(i,:))
+    X = fftshift(fft(imf(i,:)));
+    [maxpeak, maxpeakindes] = max(abs(X)*2);
+    if [(abs(f(maxpeakindes)))>=0.05 & (abs(f(maxpeakindes)))<=0.75]
+        %c=c+1;
+        M(i,:)=imf(i,:);
+
+    end
+end
